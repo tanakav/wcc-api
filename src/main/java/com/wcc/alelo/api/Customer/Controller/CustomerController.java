@@ -16,8 +16,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping
-    public List<Customer> findAll(){
-        return customerService.findAll();
+    public ResponseEntity<List<Customer>> findAll(){
+        return ResponseEntity.ok(customerService.findAll());
     }
 
     @GetMapping("/{userId}")
@@ -29,7 +29,27 @@ public class CustomerController {
     }
 
     @PostMapping
-    public Customer save(Customer customer){
-        return customerService.save(customer);
+    public ResponseEntity<Customer> save(@RequestBody Customer customer){
+        return ResponseEntity.status(201).body(customerService.save(customer));
     }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<Customer> update(@PathVariable Integer userId,@RequestBody Customer customerEdit){
+        Customer customer = customerService.findById(userId).orElse(null);
+
+        if(customer == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        customer.setCity(customerEdit.getCity());
+        customer.setState(customerEdit.getState());
+        customer.setName(customerEdit.getName());
+        return ResponseEntity.status(200).body(customerService.save(customer));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> delete(@PathVariable Integer userId){
+        customerService.deleteById(userId);
+        return ResponseEntity.ok("Cliente excluído com sucesso");
+    } 
 }

@@ -36,4 +36,8 @@ public class CustomerService implements CustomerServiceInterface {
     public Customer save(Customer customer){
         return customerRepository.save(customer);
     }
+
+    public void deleteById(Integer id){
+        customerRepository.deleteById(id);                   
+    }
 }

@@ -29,6 +29,12 @@ public class Customer {
 
     public Customer(){}
 
+    public Customer(@NotNull @NotBlank @NotEmpty String name, Integer cityId, Integer stateId) {
+        this.name = name;
+        this.cityId = cityId;
+        this.stateId = stateId;
+    }
+
     public void setName(String name){
         this.name = name;
     }
@@ -39,6 +45,10 @@ public class Customer {
 
     public void setState(Integer stateId){
         this.stateId = stateId;
+    }
+
+    public Integer getId(){
+        return this.id;
     }
 
     public String getName(){
