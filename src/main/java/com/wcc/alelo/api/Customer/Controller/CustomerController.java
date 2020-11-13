@@ -41,7 +41,6 @@ public class CustomerController {
             return ResponseEntity.notFound().build();
         }
 
-        customer.setCity(customerEdit.getCity());
         customer.setState(customerEdit.getState());
         customer.setName(customerEdit.getName());
         return ResponseEntity.status(200).body(customerService.save(customer));

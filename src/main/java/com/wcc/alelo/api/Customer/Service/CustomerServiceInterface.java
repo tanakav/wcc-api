@@ -10,7 +10,6 @@ public interface CustomerServiceInterface {
     List<Customer> findAll();
     Optional<Customer> findById(Integer id);
     List<Customer> findAllByStateId(Integer id);
-    List<Customer> findAllByCityId(Integer id);
     void deleteById(Integer id);
 
 

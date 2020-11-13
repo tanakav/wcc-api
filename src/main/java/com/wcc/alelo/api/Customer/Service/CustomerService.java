@@ -28,11 +28,6 @@ public class CustomerService implements CustomerServiceInterface {
         return customerRepository.findByStateId(id);
     }
 
-    @Override
-    public List<Customer> findAllByCityId(Integer id) {
-        return customerRepository.findByCityId(id);
-    }
-
     public Customer save(Customer customer){
         return customerRepository.save(customer);
     }

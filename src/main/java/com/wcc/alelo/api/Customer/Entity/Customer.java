@@ -22,25 +22,22 @@ public class Customer {
     private String name;
 
     @Column
-    private Integer cityId;
-
-    @Column
     private Integer stateId;
 
     public Customer(){}
 
-    public Customer(@NotNull @NotBlank @NotEmpty String name, Integer cityId, Integer stateId) {
+    public Customer(Integer id, @NotNull @NotBlank @NotEmpty String name, Integer stateId) {
+        this.id = id;
         this.name = name;
-        this.cityId = cityId;
         this.stateId = stateId;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public void setName(String name){
         this.name = name;
-    }
-
-    public void setCity(Integer cityId){
-        this.cityId = cityId;
     }
 
     public void setState(Integer stateId){
@@ -53,10 +50,6 @@ public class Customer {
 
     public String getName(){
         return this.name;
-    }
-
-    public Integer getCity(){
-        return this.cityId;
     }
 
     public Integer getState(){
