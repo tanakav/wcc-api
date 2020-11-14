@@ -1,6 +1,5 @@
 package com.wcc.alelo.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wcc.alelo.api.Customer.Controller.CustomerController;
 import com.wcc.alelo.api.Customer.Entity.Customer;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -68,17 +66,20 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
-
         Assertions.assertEquals(result.getResponse().getContentAsString(), new ObjectMapper().writeValueAsString(customerList.get(1)));
     }
 
-    @Test
-    void shouldOldObjectWithSomeFieldUpdatedWhenRequestBodyIsIncomplete() throws Exception {
+/*    @Test
+    void shouldDeleteCustomerById() throws Exception {
+        Integer id = customerList.get(1).getId();
+    }*/
+
+/*    @Test
+    void shouldUpdateOldObjectNameFieldWhenRequestBodyHasOnlyName() throws Exception {
         String newName = "Nome Editado";
         Integer id = customerList.get(1).getId();
         Customer updatedCustomer = customerList.get(1);
         updatedCustomer.setName(newName);
-
 
         when(customerServiceMock.save(customerList.get(1))).thenReturn(updatedCustomer);
 
@@ -91,5 +92,5 @@ public class CustomerControllerTest {
                 .andReturn();
 
         Assertions.assertEquals(result.getResponse().getContentAsString(),new ObjectMapper().writeValueAsString(updatedCustomer));
-    }
+    }*/
 }
