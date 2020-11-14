@@ -5,10 +5,12 @@ import org.springframework.stereotype.Repository;
 import com.wcc.alelo.api.Customer.Entity.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer,Integer> {
     List<Customer> findAll();
     List<Customer> findByStateId(Integer id);
+    Customer findByName(String name);
 
 }

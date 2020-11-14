@@ -19,8 +19,10 @@ public class CustomerService implements CustomerServiceInterface {
     }
 
     @Override
-    public Optional<Customer> findById(Integer id) {
-        return customerRepository.findById(id);
+    public Customer findById(Integer id) {
+        Optional<Customer> customer = customerRepository.findById(id);
+        if(!customer.isPresent()) return null;
+        return customer.get();
     }
 
     @Override
@@ -28,11 +30,30 @@ public class CustomerService implements CustomerServiceInterface {
         return customerRepository.findByStateId(id);
     }
 
+    @Override
+    public Boolean delete(Integer userId) {
+        Optional<Customer> customer = customerRepository.findById(userId);
+        if(customer.isPresent()) {
+            customerRepository.delete(customer.get());
+            return true;
+        }
+        return false;
+    }
+
     public Customer save(Customer customer){
         return customerRepository.save(customer);
     }
 
-    public void deleteById(Integer id){
-        customerRepository.deleteById(id);                   
+    public Customer update(Integer userId, Customer customer){
+        Optional<Customer> oldCustomer =customerRepository.findById(userId);
+
+        if(!oldCustomer.isPresent()) return null;
+
+        Customer updatedCustomer =  oldCustomer.get();
+        updatedCustomer.setState(customer.getState());
+        updatedCustomer.setName(customer.getName());
+        customerRepository.save(updatedCustomer);
+        return updatedCustomer;
     }
+
 }

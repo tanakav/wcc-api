@@ -3,6 +3,7 @@ package com.wcc.alelo.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wcc.alelo.api.Customer.Controller.CustomerController;
 import com.wcc.alelo.api.Customer.Entity.Customer;
+import com.wcc.alelo.api.Customer.Repository.CustomerRepository;
 import com.wcc.alelo.api.Customer.Service.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,6 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -54,43 +54,19 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
-        Assertions.assertEquals(result.getResponse().getContentAsString(),new ObjectMapper().writeValueAsString(customerList));
+        Assertions.assertEquals(new ObjectMapper().writeValueAsString(customerServiceMock.findAll()),result.getResponse().getContentAsString());
     }
 
     @Test
     void shouldFindCustomerById() throws Exception {
         Integer id = customerList.get(1).getId();
-        when(customerServiceMock.findById(id)).thenReturn(Optional.of(customerList.get(1)));
+        when(customerServiceMock.findById(id)).thenReturn(customerList.get(1));
 
         MvcResult result = this.mockMvc.perform(get("/clientes/{id}",id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
-        Assertions.assertEquals(result.getResponse().getContentAsString(), new ObjectMapper().writeValueAsString(customerList.get(1)));
+        Assertions.assertEquals(new ObjectMapper().writeValueAsString(customerServiceMock.findById(id)),result.getResponse().getContentAsString());
     }
 
-/*    @Test
-    void shouldDeleteCustomerById() throws Exception {
-        Integer id = customerList.get(1).getId();
-    }*/
-
-/*    @Test
-    void shouldUpdateOldObjectNameFieldWhenRequestBodyHasOnlyName() throws Exception {
-        String newName = "Nome Editado";
-        Integer id = customerList.get(1).getId();
-        Customer updatedCustomer = customerList.get(1);
-        updatedCustomer.setName(newName);
-
-        when(customerServiceMock.save(customerList.get(1))).thenReturn(updatedCustomer);
-
-        MvcResult result = this.mockMvc
-                .perform(put("/clientes/{id}",id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\""+newName+"\"}"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
-                .andReturn();
-
-        Assertions.assertEquals(result.getResponse().getContentAsString(),new ObjectMapper().writeValueAsString(updatedCustomer));
-    }*/
 }

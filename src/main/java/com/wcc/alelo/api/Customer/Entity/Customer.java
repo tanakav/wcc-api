@@ -22,11 +22,12 @@ public class Customer {
     private String name;
 
     @Column
+    @NotNull
     private Integer stateId;
 
     public Customer(){}
 
-    public Customer(Integer id, @NotNull @NotBlank @NotEmpty String name, Integer stateId) {
+    public Customer(Integer id, @NotNull @NotBlank @NotEmpty String name,@NotNull @NotBlank @NotEmpty Integer stateId) {
         this.id = id;
         this.name = name;
         this.stateId = stateId;

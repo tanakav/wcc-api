@@ -3,14 +3,13 @@ package com.wcc.alelo.api.Customer.Service;
 import com.wcc.alelo.api.Customer.Entity.Customer;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CustomerServiceInterface {
 
     List<Customer> findAll();
-    Optional<Customer> findById(Integer id);
+    Customer findById(Integer id);
     List<Customer> findAllByStateId(Integer id);
-    void deleteById(Integer id);
-
+    Boolean delete(Integer id);
+    Customer update(Integer id, Customer customer);
 
 }
