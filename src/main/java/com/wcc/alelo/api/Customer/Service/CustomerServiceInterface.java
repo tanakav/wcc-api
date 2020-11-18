@@ -8,7 +8,7 @@ public interface CustomerServiceInterface {
 
     List<Customer> findAll();
     Customer findById(Integer id);
-    List<Customer> findAllByStateId(Integer id);
+    List<Customer> findAllByCityId(Integer id);
     Boolean delete(Integer id);
     Customer update(Integer id, Customer customer);
 

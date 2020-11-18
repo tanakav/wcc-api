@@ -21,7 +21,7 @@ public class CustomerController {
 
     @ApiOperation(value= "Retorna lista de clientes")
     @ApiResponses(value={
-            @ApiResponse(code =200, message = "Lista de clientes retornado com sucesso")
+            @ApiResponse(code =200, message = "Lista de clientes")
     })
     @GetMapping
     public ResponseEntity<List<Customer>> findAll(){
@@ -30,7 +30,7 @@ public class CustomerController {
 
     @ApiOperation(value="Retorna o cliente buscando por id")
     @ApiResponses(value={
-            @ApiResponse(code=200,message="Retorna um cliente pelo id"),
+            @ApiResponse(code=200,message="Cliente retornado por id"),
             @ApiResponse(code=404,message="Cliente nao encontrado")
     })
     @GetMapping("/{userId}")
@@ -42,7 +42,7 @@ public class CustomerController {
 
     @ApiOperation(value="Salva um novo cliente no banco")
     @ApiResponses(value={
-            @ApiResponse(code=201,message="Cliente salvo com sucesso")
+            @ApiResponse(code=201,message="Cliente salvo no banco")
     })
     @PostMapping
     public ResponseEntity<Customer> save(@RequestBody Customer customer){
@@ -51,7 +51,7 @@ public class CustomerController {
 
     @ApiOperation(value="Atualiza os dados de um cliente já cadastrado")
     @ApiResponses(value={
-            @ApiResponse(code=200,message="Cliente atualizado com sucesso"),
+            @ApiResponse(code=200,message="Cliente atualizado buscado por id"),
             @ApiResponse(code=404,message="Cliente nao encontrado")
     })
     @PutMapping("/{userId}")
@@ -64,7 +64,7 @@ public class CustomerController {
 
     @ApiOperation(value="Exclui cliente buscado por id")
     @ApiResponses(value={
-            @ApiResponse(code=200,message="Cliente excluido com sucesso"),
+            @ApiResponse(code=200,message="Cliente excluido por id"),
             @ApiResponse(code=404,message="Cliente nao encontrado")
     })
     @DeleteMapping("/{userId}")
@@ -75,13 +75,13 @@ public class CustomerController {
         return ResponseEntity.notFound().build();
     }
 
-    @ApiOperation(value="Retorna todos os clientes de um estado pelo id do estado")
+    @ApiOperation(value="Retorna todos os clientes de um cidade pelo id do cidade")
     @ApiResponses(value={
-            @ApiResponse(code=200,message="Lista de clientes por estado")
+            @ApiResponse(code=200,message="Lista de clientes por cidade")
     })
-    @GetMapping("/estado/{stateId}")
-    public ResponseEntity<List<Customer>> findAllByState(@PathVariable Integer stateId){
-        List<Customer> customerList = customerService.findAllByStateId(stateId);
+    @GetMapping("/estado/{cityId}")
+    public ResponseEntity<List<Customer>> findAllByCity(@PathVariable Integer cityId){
+        List<Customer> customerList = customerService.findAllByCityId(cityId);
 
         if(customerList.size()<=0) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(customerList);

@@ -3,7 +3,6 @@ package com.wcc.alelo.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wcc.alelo.api.Customer.Controller.CustomerController;
 import com.wcc.alelo.api.Customer.Entity.Customer;
-import com.wcc.alelo.api.Customer.Repository.CustomerRepository;
 import com.wcc.alelo.api.Customer.Service.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,5 +67,22 @@ public class CustomerControllerTest {
                 .andReturn();
         Assertions.assertEquals(new ObjectMapper().writeValueAsString(customerServiceMock.findById(id)),result.getResponse().getContentAsString());
     }
+
+/*
+    @Test
+    void shouldUpdateCustomer() throws Exception {
+        Customer customer = customerList.get(1);
+        Customer editedCustomer = new Customer(customer.getId(),"Editado",2);
+        when(customerServiceMock.update(customer.getId(),editedCustomer)).thenReturn(editedCustomer);
+
+        MvcResult result = this.mockMvc.perform(put("/clientes/{id}",customer.getId())
+                    .content(new ObjectMapper().writeValueAsString(editedCustomer))
+                    .contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+        Assertions.assertEquals(new ObjectMapper().writeValueAsString(editedCustomer),result.getResponse().getContentAsString());
+    }
+*/
 
 }

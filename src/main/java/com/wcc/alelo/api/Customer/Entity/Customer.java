@@ -23,14 +23,14 @@ public class Customer {
 
     @Column
     @NotNull
-    private Integer stateId;
+    private Integer cityId;
 
     public Customer(){}
 
-    public Customer(Integer id, @NotNull @NotBlank @NotEmpty String name,@NotNull @NotBlank @NotEmpty Integer stateId) {
+    public Customer(Integer id, @NotNull @NotBlank @NotEmpty String name,@NotNull Integer cityId) {
         this.id = id;
         this.name = name;
-        this.stateId = stateId;
+        this.cityId = cityId;
     }
 
     public void setId(Integer id){
@@ -41,8 +41,8 @@ public class Customer {
         this.name = name;
     }
 
-    public void setState(Integer stateId){
-        this.stateId = stateId;
+    public void setCity(Integer cityId){
+        this.cityId = cityId;
     }
 
     public Integer getId(){
@@ -53,7 +53,7 @@ public class Customer {
         return this.name;
     }
 
-    public Integer getState(){
-        return this.stateId;
+    public Integer getCity(){
+        return this.cityId;
     }
 }

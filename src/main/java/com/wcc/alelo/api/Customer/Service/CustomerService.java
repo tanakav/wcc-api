@@ -26,8 +26,8 @@ public class CustomerService implements CustomerServiceInterface {
     }
 
     @Override
-    public List<Customer> findAllByStateId(Integer id) {
-        return customerRepository.findByStateId(id);
+    public List<Customer> findAllByCityId(Integer id) {
+        return customerRepository.findAllByCityId(id);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CustomerService implements CustomerServiceInterface {
         if(!oldCustomer.isPresent()) return null;
 
         Customer updatedCustomer =  oldCustomer.get();
-        updatedCustomer.setState(customer.getState());
+        updatedCustomer.setCity(customer.getCity());
         updatedCustomer.setName(customer.getName());
         customerRepository.save(updatedCustomer);
         return updatedCustomer;

@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer,Integer> {
     List<Customer> findAll();
-    List<Customer> findByStateId(Integer id);
-    Customer findByName(String name);
+    List<Customer> findAllByCityId(Integer id);
+    Optional<Customer> findByName(String name);
 
 }
